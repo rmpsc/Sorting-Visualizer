@@ -1,13 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
+
 /* Master styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    background-color: whitesmoke;
+}
+
 body {
     font-family: "Montserrat", sans-serif;
     margin: 0px;
 }
 
 .nav-wrapper {
-    padding: 48px;
+    padding: 38px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
+    /* lines up text with button */
+    align-items: center;
+}
+
+.nav-wrapper > div {
+    padding-right: 20px;
+}
+
+.nav-left {
+    margin-right: auto;
 }
 
 .algo-wrapper {
@@ -17,8 +36,25 @@ body {
 
 .algo-type-wrapper {
     padding-right: 20px;
+    transition: all .5s ease 0s;
 }
 
 .algo-type-wrapper:hover {
     color: salmon;
+}
+
+button {
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    padding: 9px 25px;
+    background-color: salmon;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all .5s ease 0s;
+}
+
+button:hover {
+    color: salmon;
+    opacity: 80%;
 }
