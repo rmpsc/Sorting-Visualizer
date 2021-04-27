@@ -10,12 +10,15 @@ body {
     justify-content: space-between;
 }
 
-.algo-type-wrapper {
-    border-bottom: 5px;
-}
-
 .algo-wrapper {
     display: flex;
     justify-content: space-between;
-    border-bottom: 5px;
+}
+
+.algo-type-wrapper {
+    padding-right: 20px;
+}
+
+.algo-type-wrapper:hover {
+    color: salmon;
 }
