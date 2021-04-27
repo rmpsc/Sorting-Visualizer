@@ -1,0 +1,21 @@
+/* Master styles */
+body {
+    font-family: "Montserrat", sans-serif;
+    margin: 0px;
+}
+
+.nav-wrapper {
+    padding: 48px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.algo-type-wrapper {
+    border-bottom: 5px;
+}
+
+.algo-wrapper {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 5px;
+}

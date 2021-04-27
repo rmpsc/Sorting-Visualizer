@@ -1,0 +1,10 @@
+TODOs
+
+1. navbar
+    - title
+    - create new array
+    - change array size/speed
+    - sorting algorithms
+    - sort button
+
+2. array visualizer
