@@ -3,34 +3,40 @@
 <head>
     <meta charset="utf-8" />
     <title>Sorting Visualizer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <div class="nav-wrapper">
+
             <div class="nav-left">
                 <div>Sorting Visualizer</div>
+
+                <div>|</div>
+
+                <div class="algo-wrapper">
+                    <div class="algo-type-wrapper active-algo-type">
+                        <button class="algo-button">Bubble Sort</button>
+                    </div>
+    
+                    <div class="algo-type-wrapper">
+                        <button class="algo-button">Merge Sort</button>
+                    </div>
+    
+                    <div class="algo-type-wrapper">
+                        <button class="algo-button">Quick Sort</button>
+                    </div>
+                </div>
             </div>
 
-            <div>New Array</div>
+            <div class="nav-right">
+    
+                <button>New Array</button>
+                <button>Sort</button>
 
-            <div class="algo-wrapper">
-                <div class="algo-type-wrapper">
-                    <div>Bubble Sort</div>
-                </div>
-
-                <div class="algo-type-wrapper">
-                    <div>Merge Sort</div>
-                </div>
-
-                <div class="algo-type-wrapper">
-                    <div>Quick Sort</div>
-                </div>
             </div>
-
-            <button>Sort</button>
-        
+            
         </div>
     </div>
 </body>
