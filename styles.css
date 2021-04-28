@@ -1,8 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
 /* Master styles */
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
     background-color: whitesmoke;
@@ -26,16 +25,28 @@ body {
 }
 
 .nav-left {
+    display: flex;
+    text-transform: uppercase;
     margin-right: auto;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-left > div {
+    margin-right: 30px;
+    cursor: default;
+}
+
+.nav-right {
+    display: flex;
 }
 
 .algo-wrapper {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 
 .algo-type-wrapper {
-    padding-right: 20px;
     transition: all .5s ease 0s;
 }
 
@@ -43,18 +54,30 @@ body {
     color: salmon;
 }
 
+
 button {
     font-family: "Montserrat", sans-serif;
     font-size: 16px;
     padding: 9px 25px;
+    margin-right: 20px;
     background-color: salmon;
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    transition: all .5s ease 0s;
+    transition: .5s ease 0s;
 }
 
 button:hover {
     color: salmon;
-    opacity: 80%;
+    opacity: 80;
+}
+
+/* no need to repeat attributes from button */
+.algo-button {
+    padding: 0 0;
+    background-color: transparent;
+}
+
+.algo-button:focus {
+    color: salmon;
 }
