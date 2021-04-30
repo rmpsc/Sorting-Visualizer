@@ -4,12 +4,12 @@
 * {
     margin: 0;
     padding: 0;
-    background-color: whitesmoke;
+    box-sizing: border-box;
 }
 
 body {
+    background-color: #292c34;
     font-family: "Montserrat", sans-serif;
-    margin: 0px;
 }
 
 .nav-wrapper {
@@ -18,6 +18,7 @@ body {
     justify-content: flex-end;
     /* lines up text with button */
     align-items: center;
+    background-color: whitesmoke;
 }
 
 .nav-wrapper > div {
@@ -50,9 +51,6 @@ body {
     transition: all .5s ease 0s;
 }
 
-.algo-type-wrapper:hover {
-    color: salmon;
-}
 
 
 button {
