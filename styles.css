@@ -42,6 +42,30 @@ body {
     display: flex;
 }
 
+.data-container {
+    width: 600px;
+    height: 384px;
+    position: relative;
+    margin: 0 auto;
+}
+
+.bar {
+	width: 28px;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	background-color: salmon;
+	transition: 0.2s all ease;
+}
+
+.bar_id {
+	position: absolute;
+	top: -24px;
+	width: 100%;
+	text-align: center;
+    color: white
+}
+
 .algo-wrapper {
     display: flex;
     justify-content: space-around;
