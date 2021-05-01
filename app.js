@@ -116,14 +116,14 @@ for (var i = 0; i < bars.length; i += 1) {
 	if (val1 < val2) {
 		if (min_idx !== i) {
 
-		// Provide skyblue color to the (min-idx)th bar
-		bars[min_idx].style.backgroundColor = " rgb(24, 190, 255)";
+		// Provide salmon color to the (min-idx)th bar
+		bars[min_idx].style.backgroundColor = "salmon";
 		}
 		min_idx = j;
 	} else {
 
-		// Provide skyblue color to the jth bar
-		bars[j].style.backgroundColor = " rgb(24, 190, 255)";
+		// Provide salmon color to the jth bar
+		bars[j].style.backgroundColor = "salmon";
 	}
 	}
 
@@ -142,8 +142,8 @@ for (var i = 0; i < bars.length; i += 1) {
 	}, 300)
 	);
 
-	// Provide skyblue color to the (min-idx)th bar
-	bars[min_idx].style.backgroundColor = " rgb(24, 190, 255)";
+	// Provide salmon color to the (min-idx)th bar
+	bars[min_idx].style.backgroundColor = "salmon";
 
 	// Provide lightgreen color to the ith bar
 	bars[i].style.backgroundColor = " rgb(49, 226, 13)";
