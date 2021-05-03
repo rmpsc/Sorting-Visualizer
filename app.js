@@ -61,7 +61,7 @@ function sort() {
     }
 
     else if (currentAlgo === "selection") {
-        selectionSort(300);
+        selectionSort(100);
     }
 
     console.log(`sorting with ${currentAlgo}`)
@@ -91,10 +91,10 @@ async function bubbleSort(delay) {
     let bars = document.querySelectorAll(".bar");
 
     for (var i = 0; i < bars.length; i++) {
-        bars[i].style.backgroundColor = "white";
 
         for (var j = 0; j < bars.length -i -1; j++) {
             bars[j].style.backgroundColor = "white";
+            bars[j + 1].style.backgroundColor = "white";
 
              // store current j value
              var curr_j = parseInt(bars[j].childNodes[0].innerHTML);
