@@ -1,6 +1,9 @@
 let arr = [1, 3, 4, 2, 3, 4, 5, 2];
 let currentAlgo = "";
 
+// to do
+// make function to swap bars
+
 /* dom variables */
 const bubble_div = document.getElementById("bubble");
 const merge_div = document.getElementById("merge");
@@ -57,11 +60,11 @@ function sort() {
     } 
     
     else if (currentAlgo === "bubble") {
-        bubbleSort(300);
+        bubbleSort(500);
     }
 
     else if (currentAlgo === "selection") {
-        selectionSort(100);
+        selectionSort(200);
     }
 
     console.log(`sorting with ${currentAlgo}`)
@@ -96,12 +99,51 @@ async function bubbleSort(delay) {
             bars[j].style.backgroundColor = "white";
             bars[j + 1].style.backgroundColor = "white";
 
+            // pauses code for duration of delay
+            await new Promise((resolve) =>
+                setTimeout(() => {
+                resolve();
+                }, delay)
+            );
+
              // store current j value
              var curr_j = parseInt(bars[j].childNodes[0].innerHTML);
-
              // stores minimum value so far
              var next_j = parseInt(bars[j + 1].childNodes[0].innerHTML);
 
+             if (curr_j > next_j) {
+
+                // temp vars for j + 1 height and text
+                var temp1 = bars[j + 1].style.height;
+                var temp2 = bars[j + 1].childNodes[0].innerText;
+
+                // j + 1 takes values of j
+                bars[j + 1].style.height = bars[j].style.height;
+                bars[j].style.height = temp1;
+                bars[j + 1].childNodes[0].innerText = bars[j].childNodes[0].innerText;
+                bars[j].childNodes[0].innerText = temp2;
+
+                // To pause the execution of code for 300 milliseconds
+                await new Promise((resolve) =>
+                setTimeout(() => {
+                    resolve();
+                }, delay)
+                );
+            }
+            if (j === bars.length -i -2) {
+                // make last bar green
+                bars[j].style.backgroundColor = "salmon";
+                bars[j + 1].style.backgroundColor = "green";
+            }
+            else {
+            // make bars salmon again
+            bars[j].style.backgroundColor = "salmon";
+            bars[j + 1].style.backgroundColor = "salmon";
+            }
+        }
+        // makes first bar green on completion
+        if ((i + 1) === bars.length) {
+            bars[0].style.backgroundColor = "green";
         }
     }
 }
@@ -121,7 +163,7 @@ async function selectionSort(delay) {
 
             // jth bar is white
             bars[j].style.backgroundColor = "white";
-                
+
             // pauses code for duration of delay
             await new Promise((resolve) =>
                 setTimeout(() => {
@@ -138,7 +180,7 @@ async function selectionSort(delay) {
             if (current < min) {
                 // if min index isn't the current i index
                 if (min_idx !== i) {
-                    // change color from red back to salmon, we've found a smaller int
+                    // change color of min from white back to salmon, we've found a smaller int
                     bars[min_idx].style.backgroundColor = "salmon";
                 }
                 // set new min_idx
