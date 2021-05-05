@@ -60,11 +60,11 @@ function sort() {
     } 
     
     else if (currentAlgo === "bubble") {
-        bubbleSort(500);
+        bubbleSort(50);
     }
 
     else if (currentAlgo === "selection") {
-        selectionSort(200);
+        selectionSort(50);
     }
 
     console.log(`sorting with ${currentAlgo}`)
@@ -133,7 +133,7 @@ async function bubbleSort(delay) {
             if (j === bars.length -i -2) {
                 // make last bar green
                 bars[j].style.backgroundColor = "salmon";
-                bars[j + 1].style.backgroundColor = "green";
+                bars[j + 1].style.backgroundColor = "rgb(208, 255, 192)";
             }
             else {
             // make bars salmon again
@@ -143,7 +143,7 @@ async function bubbleSort(delay) {
         }
         // makes first bar green on completion
         if ((i + 1) === bars.length) {
-            bars[0].style.backgroundColor = "green";
+            bars[0].style.backgroundColor = "rgb(208, 255, 192)";
         }
     }
 }
@@ -157,7 +157,7 @@ async function selectionSort(delay) {
         // assign i to min_idx
         min_idx = i;
         // current index is red
-        bars[i].style.backgroundColor = "red";
+        bars[i].style.backgroundColor = "rgb(119, 158, 255)";
 
         for (var j = i + 1; j < bars.length; j++) {
 
@@ -211,7 +211,8 @@ async function selectionSort(delay) {
         bars[min_idx].style.backgroundColor = "salmon";
 
         // change in place bar to light green
-        bars[i].style.backgroundColor = " rgb(49, 226, 13)";
+        bars[i].style.backgroundColor = "rgb(208, 255, 192)";
+        // light green "rgb(49, 226, 13)"
     }
 }
 function main() {
