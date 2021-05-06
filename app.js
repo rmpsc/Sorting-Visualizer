@@ -2,7 +2,9 @@ let arr = [1, 3, 4, 2, 3, 4, 5, 2];
 let currentAlgo = "";
 
 // to do
+// implement merge and quick
 // make function to swap bars
+// disable top buttons when algorithm in progress
 
 /* dom variables */
 const bubble_div = document.getElementById("bubble");
@@ -60,7 +62,7 @@ function sort() {
     }
     
     else if (currentAlgo === "bubble") {
-        bubbleSort(50);
+        bubbleSort(200);
     }
 
     else if (currentAlgo === "merge") {
@@ -72,7 +74,7 @@ function sort() {
     }
 
     else if (currentAlgo === "selection") {
-        selectionSort(50);
+        selectionSort(200);
     }
 
     console.log(`sorting with ${currentAlgo}`)
@@ -223,6 +225,7 @@ async function selectionSort(delay) {
         // light green "rgb(49, 226, 13)"
     }
 }
+
 function main() {
 
     generateBars();
@@ -241,4 +244,3 @@ function main() {
 }
 
 main();
-
