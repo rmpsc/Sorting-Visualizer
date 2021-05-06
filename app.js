@@ -57,10 +57,18 @@ function sort() {
 
     if (currentAlgo === "") {
         alert("Please select an algorithm.");
-    } 
+    }
     
     else if (currentAlgo === "bubble") {
         bubbleSort(50);
+    }
+
+    else if (currentAlgo === "merge") {
+        alert("Merge sort is currently in development. Will be on the way shortly!");
+    }
+
+    else if (currentAlgo === "quick") {
+        alert("Quick sort is currently in development. Will be on the way shortly!");
     }
 
     else if (currentAlgo === "selection") {
