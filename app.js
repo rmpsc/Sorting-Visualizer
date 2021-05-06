@@ -1,10 +1,5 @@
-let arr = [1, 3, 4, 2, 3, 4, 5, 2];
+let arr_test = [10, 7, 8, 9, 1, 5];
 let currentAlgo = "";
-
-// to do
-// implement merge and quick
-// make function to swap bars
-// disable top buttons when algorithm in progress
 
 /* dom variables */
 const bubble_div = document.getElementById("bubble");
@@ -70,7 +65,10 @@ function sort() {
     }
 
     else if (currentAlgo === "quick") {
-        alert("Quick sort is currently in development. Will be on the way shortly!");
+        // alert("Quick sort is currently in development. Will be on the way shortly!");
+        console.log(arr_test);
+        quickSortNorm(arr_test, 0, arr_test.length - 1);
+        console.log(arr_test);
     }
 
     else if (currentAlgo === "selection") {
@@ -123,15 +121,7 @@ async function bubbleSort(delay) {
 
              if (curr_j > next_j) {
 
-                // temp vars for j + 1 height and text
-                var temp1 = bars[j + 1].style.height;
-                var temp2 = bars[j + 1].childNodes[0].innerText;
-
-                // j + 1 takes values of j
-                bars[j + 1].style.height = bars[j].style.height;
-                bars[j].style.height = temp1;
-                bars[j + 1].childNodes[0].innerText = bars[j].childNodes[0].innerText;
-                bars[j].childNodes[0].innerText = temp2;
+                swap(bars, j, j + 1);
 
                 // To pause the execution of code for 300 milliseconds
                 await new Promise((resolve) =>
@@ -157,6 +147,42 @@ async function bubbleSort(delay) {
         }
     }
 }
+
+function partitionNorm(arr, left, right) {
+    var piv_idx = left;
+    var pivot = arr[piv_idx];
+    console.log(`pivot = ${pivot}`);
+
+    while (left < right) {
+
+        while ((left < arr.length) && (arr[left] <= pivot)) {
+            left += 1;
+        }
+
+        while (arr[right] > pivot) {
+            right -= 1;
+        }
+
+        // swap if they haven't crossed
+        if (left < right) {
+            var temp = arr[right];
+            arr[right] = arr[left];
+            arr[left] = temp;
+        }
+    }
+
+    return right;
+}
+
+function quickSortNorm(arr, left, right) {
+    if (left < right) {
+        var par_idx = partitionNorm(arr, left, right);
+
+        quickSortNorm(arr, left, par_idx - 1);
+        quickSortNorm(arr, par_idx + 1, right);
+    }
+}
+
 
 async function selectionSort(delay) {
     let bars = document.querySelectorAll(".bar");
@@ -202,14 +228,8 @@ async function selectionSort(delay) {
             }
         }
 
-        // To swap ith and (min_idx)th bar
-        var temp1 = bars[min_idx].style.height;
-        var temp2 = bars[min_idx].childNodes[0].innerText;
-        bars[min_idx].style.height = bars[i].style.height;
-        bars[i].style.height = temp1;
-        bars[min_idx].childNodes[0].innerText = bars[i].childNodes[0].innerText;
-        bars[i].childNodes[0].innerText = temp2;
-        
+        swap(bars, i, min_idx);
+
         // To pause the execution of code for 300 milliseconds
         await new Promise((resolve) =>
         setTimeout(() => {
@@ -224,6 +244,18 @@ async function selectionSort(delay) {
         bars[i].style.backgroundColor = "rgb(208, 255, 192)";
         // light green "rgb(49, 226, 13)"
     }
+}
+
+function swap(bars, i, j) {
+    // store j attributes
+    var temp_height = bars[j].style.height;
+    var temp_text = bars[j].childNodes[0].innerText;
+    // j takes i attributes
+    bars[j].style.height = bars[i].style.height;
+    bars[j].childNodes[0].innerText = bars[i].childNodes[0].innerText;
+    // i takes j attributes
+    bars[i].style.height = temp_height;
+    bars[i].childNodes[0].innerText = temp_text;
 }
 
 function main() {
