@@ -148,38 +148,33 @@ async function bubbleSort(delay) {
     }
 }
 
-function partitionNorm(arr, left, right) {
-    var piv_idx = left;
-    var pivot = arr[piv_idx];
-    console.log(`pivot = ${pivot}`);
+function partitionNorm(arr, low, high) {
+    let pivot = arr[high]; // pivot becomes last element in arr
+    let i = low - 1; // i starts before first index
 
-    while (left < right) {
+    for (let j = low; j <= high - 1; j++) {
 
-        while ((left < arr.length) && (arr[left] <= pivot)) {
-            left += 1;
-        }
-
-        while (arr[right] > pivot) {
-            right -= 1;
-        }
-
-        // swap if they haven't crossed
-        if (left < right) {
-            var temp = arr[right];
-            arr[right] = arr[left];
-            arr[left] = temp;
+        if (arr[j] < pivot) {
+            i++;
+            var temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
         }
     }
 
-    return right;
+    temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
+
+    return i + 1;
 }
 
-function quickSortNorm(arr, left, right) {
-    if (left < right) {
-        var par_idx = partitionNorm(arr, left, right);
+function quickSortNorm(arr, low, high) {
+    if (low < high) {
+        let pivot = partitionNorm(arr, low, high);
 
-        quickSortNorm(arr, left, par_idx - 1);
-        quickSortNorm(arr, par_idx + 1, right);
+        quickSortNorm(arr, low, pivot - 1);
+        quickSortNorm(arr, pivot + 1, high);
     }
 }
 
