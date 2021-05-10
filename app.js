@@ -169,6 +169,28 @@ function partitionNorm(arr, low, high) {
     return i + 1;
 }
 
+async function partition(delay, arr, low, high) {
+    let bars = document.querySelectorAll(".bar");
+    let i = low - 1;
+
+    for (let j = low; j <= high - 1; j++) {
+
+        if (bars[j] < pivot) {
+            i++;
+            var temp = bars[i];
+        }
+    }
+}
+
+async function quickSort(delay, arr, low, high) {
+    if (low < high) {
+        let pivot = partition(arr, low, high);
+
+        quickSort(delay, arr, low, pivot - 1);
+        quickSort(delay, arr, pivot + 1, high);
+    }
+}
+
 function quickSortNorm(arr, low, high) {
     if (low < high) {
         let pivot = partitionNorm(arr, low, high);
@@ -177,7 +199,6 @@ function quickSortNorm(arr, low, high) {
         quickSortNorm(arr, pivot + 1, high);
     }
 }
-
 
 async function selectionSort(delay) {
     let bars = document.querySelectorAll(".bar");
