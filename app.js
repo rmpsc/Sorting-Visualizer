@@ -70,7 +70,7 @@ function sort() {
         // quickSortNorm(arr_test, 0, arr_test.length - 1);
         // console.log(arr_test);
         let bars = document.querySelectorAll(".bar");
-        quickSort(200, arr_test, 0, bars.length - 1);
+        quickSort(200, 0, bars.length - 1);
     }
 
     else if (currentAlgo === "selection") {
@@ -78,26 +78,6 @@ function sort() {
     }
 
     console.log(`sorting with ${currentAlgo}`)
-}
-
-function bubbleSortNorm(arr) {
-    for (var i = 0; i < arr.length; i++) {
-
-        // Last i elements are already in place  
-        for (var j = 0; j < ( arr.length -i -1); j++){
-            
-            // Checking if the item at present iteration 
-            // is greater than the next iteration
-            if (arr[j] > arr[j+1]) {
-                // If the condition is true then swap them
-                var temp = arr[j]
-                arr[j] = arr[j+1]
-                arr[j+1] = temp
-            }
-        }
-    }
-    // Print the sorted array
-    console.log(arr);
 }
 
 async function bubbleSort(delay) {
@@ -150,35 +130,14 @@ async function bubbleSort(delay) {
     }
 }
 
-function partitionNorm(arr, low, high) {
-    let pivot = arr[high]; // pivot becomes last element in arr
-    let i = low - 1; // i starts before first index
-
-    for (let j = low; j <= high - 1; j++) {
-
-        if (arr[j] < pivot) {
-            i++;
-            var temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-        }
-    }
-
-    temp = arr[i + 1];
-    arr[i + 1] = arr[high];
-    arr[high] = temp;
-
-    return i + 1;
-}
-
-async function partition(delay, arr, low, high) {
+async function partition(delay, low, high) {
     let bars = document.querySelectorAll(".bar");
     // stores minimum value so far
     var pivot_val = parseInt(bars[high].childNodes[0].innerHTML);
-
+    // i starts before first index
     let i = low - 1;
 
-    // pivot colored blue
+    // color pivot blue
     bars[high].style.backgroundColor = "rgb(119, 158, 255)";
 
     // pauses code for duration of delay
@@ -188,6 +147,7 @@ async function partition(delay, arr, low, high) {
         }, delay)
     );
 
+    // stops before pivot which is last bar
     for (let j = low; j <= high - 1; j++) {
 
         // change current j to white
@@ -255,29 +215,21 @@ async function partition(delay, arr, low, high) {
     return i + 1;
 }
 
-async function quickSort(delay, arr, low, high) {
+async function quickSort(delay, low, high) {
     let bars = document.querySelectorAll(".bar");
     if (low < high) {
-        let pivot = await partition(delay, arr, low, high);
+        let pivot = await partition(delay, low, high);
         console.log(`pivot index = ${pivot}`);
 
-        await quickSort(delay, arr, low, pivot - 1);
+        await quickSort(delay, low, pivot - 1);
         for (let i = low; i < pivot; i++) {
             bars[i].style.backgroundColor = "rgb(208, 255, 192)";
         }
-        await quickSort(delay, arr, pivot + 1, high);
+        await quickSort(delay, pivot + 1, high);
         for (let i = pivot + 1; i < high + 1; i++) {
             bars[i].style.backgroundColor = "rgb(208, 255, 192)";
         }
-    }
-}
-
-function quickSortNorm(arr, low, high) {
-    if (low < high) {
-        let pivot = partitionNorm(arr, low, high);
-
-        quickSortNorm(arr, low, pivot - 1);
-        quickSortNorm(arr, pivot + 1, high);
+        bars[pivot].style.backgroundColor = "rgb(208, 255, 192)";
     }
 }
 
