@@ -9,6 +9,8 @@ const selection_div = document.getElementById("selection");
 const newArray_div = document.getElementById("new-array");
 const sort_div = document.getElementById("sort");
 const container = document.querySelector(".data-container");
+const l_container = document.querySelector(".left-data-container");
+const r_container = document.querySelector(".right-data-container");
 
 function generateBars(num = 20) {
     for (let i = 0; i < num; i += 1) {
@@ -61,7 +63,9 @@ function sort() {
     }
 
     else if (currentAlgo === "merge") {
-        alert("Merge sort is currently in development. Will be on the way shortly!");
+        // alert("Merge sort is currently in development. Will be on the way shortly!");
+        let bars = document.querySelectorAll(".bar");
+        mergeSort(500, 0, bars.length - 1);
     }
 
     else if (currentAlgo === "quick") {
@@ -130,6 +134,131 @@ async function bubbleSort(delay) {
     }
 }
 
+async function merge2(delay, low, mid, high) {
+    let bars = document.querySelectorAll(".bar");
+    let left_size = low - mid + 1;
+    let right_size = high - mid;
+
+    // copy values over to left and right arrays
+    for (let i = 0; i <= left_size; i++) {
+        console.log("building left");
+        // left[i] = bars[i + l];
+        const left = document.createElement("div");
+        left.classList.add("left");
+
+        left.style.height = bars[i + l].style.height;
+        left.style.transform = `translateX(${i * 30}px)`;
+
+        // create a label element
+        var leftLabel = document.createElement("label");
+        leftLabel.classList.add("l_bar_id");
+
+        leftLabel.innerHTML = bars[i + l].childNodes[0].innerHTML;
+
+        left.appendChild(leftLabel);
+
+        l_container.appendChild(left);
+    }
+
+    for (let j = 0; j <= right_size; j++) {
+        console.log("building right");
+        // right[i] = bars[j + (m + 1)];
+        const right = document.createElement("div");
+        right.classList.add("right");
+
+        right.style.height = bars[j + (m + 1)].style.height;
+        right.style.transform = `translateX(${i * 30}px)`;
+
+        // create a label element
+        var rightLabel = document.createElement("label");
+        rightLabel.classList.add("r_bar_id");
+
+        rightLabel.innerHTML = bars[j + (m + 1)].childNodes[0].innerHTML;
+
+        right.appendChild(rightLabel);
+
+        r_container.appendChild(right);
+    }
+    
+    let i = 0;
+    let j = 0;
+    let merged = low;
+
+    while (i < left_size && j < right_size) {
+        // store current left value
+        let l_val = parseInt(left[i].childNodes[0].innerHTML);
+        // store current right value
+        let r_val = parseInt(right[j].childNodes[0].innerHTML);
+        console.log(`l_val = ${l_val}`);
+        console.log(`r_val = ${r_val}`);
+        // compare left and right values
+        if (l_val <= r_val) {
+            Console.log("switch");
+            // swap(bars, merged, i);
+            bars[merged].style.height = left[i].style.height;
+            bars[merged].childNodes[0].innerText = left[i].childNodes[0].innerText;
+            i++;
+
+        } else {
+            // swap(bars, merged, j);
+            bars[merged].style.height = right[j].style.height;
+            bars[merged].childNodes[0].innerText = right[j].childNodes[0].innerText;
+            j++;
+        }
+        merged++;
+    }
+
+    // fill in leftover values
+    while (i < left_size) {
+        bars[merged].style.height = left[i].style.height;
+        bars[merged].childNodes[0].innerText = left[i].childNodes[0].innerText;
+        i++;
+        merged++;
+    }
+
+    while (j < right_size) {
+        bars[merged].style.height = right[j].style.height;
+        bars[merged].childNodes[0].innerText = right[j].childNodes[0].innerText;
+        j++;
+        merged++;
+    }
+}
+/*
+async function merge(delay, low, mid, high) {
+    let bars = document.querySelectorAll(".bar");
+    let left_size = low - mid + 1;
+    let right_size = high - mid;
+
+    while (i < left_size && j < right_size) {
+        // store current left value
+        let l_val = parseInt(left[i].childNodes[0].innerHTML);
+        // store current right value
+        let r_val = parseInt(right[j].childNodes[0].innerHTML);
+        console.log(`l_val = ${l_val}`);
+        console.log(`r_val = ${r_val}`);
+        // compare left and right values
+        if (l_val <= r_val) {
+            console.log("switch");
+            // swap(bars, merged, i);
+            bars[merged].style.height = left[i].style.height;
+            bars[merged].childNodes[0].innerText = left[i].childNodes[0].innerText;
+            i++;
+        }
+    }
+}
+*/
+
+async function mergeSort(delay, low, high) {
+
+    if (low < high) {
+        let mid = (low + high) / 2;
+        let left = await mergeSort(delay, low, mid);
+        let right = await mergeSort(delay, mid + 1, high);
+
+        await merge(delay, left, mid, right);
+    }
+}
+
 async function partition(delay, low, high) {
     let bars = document.querySelectorAll(".bar");
     // stores minimum value so far
@@ -165,7 +294,7 @@ async function partition(delay, low, high) {
 
         // increments i then swaps i and j
         if (j_val < pivot_val) {
-            if (i >= low) {
+            if (i >= low && bars[i].style.backgroundColor != "rgb(208, 255, 192)") {
                 bars[i].style.backgroundColor = "salmon";
             }
             i++;
