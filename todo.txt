@@ -11,3 +11,4 @@ TODOs
     - implement merge and quick
     - make function to swap bars (DONE)
     - disable top buttons when algorithm in progress
+    - make timeout function for pause

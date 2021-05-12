@@ -64,8 +64,9 @@ function sort() {
 
     else if (currentAlgo === "merge") {
         // alert("Merge sort is currently in development. Will be on the way shortly!");
-        let bars = document.querySelectorAll(".bar");
-        mergeSort(500, 0, bars.length - 1);
+        // let bars = document.querySelectorAll(".bar");
+        // mergeSort(500, 0, bars.length - 1);
+        msArrays();
     }
 
     else if (currentAlgo === "quick") {
@@ -223,39 +224,78 @@ async function merge2(delay, low, mid, high) {
         merged++;
     }
 }
-/*
-async function merge(delay, low, mid, high) {
-    let bars = document.querySelectorAll(".bar");
-    let left_size = low - mid + 1;
-    let right_size = high - mid;
 
-    while (i < left_size && j < right_size) {
-        // store current left value
-        let l_val = parseInt(left[i].childNodes[0].innerHTML);
-        // store current right value
-        let r_val = parseInt(right[j].childNodes[0].innerHTML);
-        console.log(`l_val = ${l_val}`);
-        console.log(`r_val = ${r_val}`);
-        // compare left and right values
-        if (l_val <= r_val) {
-            console.log("switch");
-            // swap(bars, merged, i);
-            bars[merged].style.height = left[i].style.height;
-            bars[merged].childNodes[0].innerText = left[i].childNodes[0].innerText;
-            i++;
+async function merge(start, end) {
+
+    let mid = parseInt((l + r));
+    let start1 = start, start2 = mid + 1;
+    let end1 = mid, end2 = end;
+
+    // initial index of merged subarray
+    let index = start;
+    while (start1 <= end1 && start2 <= end2) {
+        if (arr[start1] <= arr[start2]) {
+            itmd[index] = arr[start1]
+            index = index + 1
+            start1 = start1 + 1;
+        }
+        else if(arr[start1] > arr[start2]) {
+            itmd[index] = arr[start2]
+            index = index + 1
+            start2 = start2 + 1;
         }
     }
+  
+    // Copy the remaining elements of
+    // arr[], if there are any
+    while (start1 <= end1) {
+        itmd[index] = arr[start1]
+        index = index + 1
+        start1 = start1 + 1;
+    }
+  
+    while (start2 <= end2) {
+        itmd[index] = arr[start2]
+        index = index + 1
+        start2 = start2 + 1;
+    }
+  
+    index = start
+    while (index <= end) {
+        arr[index] = itmd[index];
+        index++;
+    }
 }
-*/
 
-async function mergeSort(delay, low, high) {
+function msArrays() {
+    let bars = document.querySelectorAll(".bar");
 
-    if (low < high) {
-        let mid = (low + high) / 2;
-        let left = await mergeSort(delay, low, mid);
-        let right = await mergeSort(delay, mid + 1, high);
+    var arr = [], itmd = [], visited = [];
 
-        await merge(delay, left, mid, right);
+    var len_of_arr = 20;
+
+    for (let i = 0; i < len_of_arr; i++) {
+        arr.push(bars[i].childNodes[0].innerHTML);
+        console.log(bars[i].childNodes[0].innerHTML);
+    }
+
+    // initialize itmd and visited with zeros
+    for (let i = 0; i < len_of_arr; i++) {
+        itmd.push(0);
+        visited.push(0);
+    }
+
+    console.log(itmd);
+
+}
+
+async function mergeSort(delay, l, r) {
+
+    if (l < r) {
+        let mid = (l + r) / 2;
+        let left = await mergeSort(delay, l, mid);
+        let right = await mergeSort(delay, mid + 1, r);
+
     }
 }
 

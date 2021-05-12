@@ -50,3 +50,59 @@ function quickSortNorm(arr, low, high) {
     }
 }
 
+function mergeSortNorm(arr, l, r) {
+    if (l < r) {
+        let m = (l + r) / 2;
+
+        mergeSortNorm(arr, 1, m);
+        mergeSortNorm(arr, m + 1, r);
+        mergeNorm(arr, l, m, r);
+    }
+}
+
+function mergeNorm(arr, l, m, r) {
+    let l_size = m - l + 1;
+    let r_size = r - m;
+
+    let l_temp = [];
+    let r_temp = [];
+
+    for (let i = 0; i < l_size; i++) {
+        l_temp[i] = arr[l + i];
+    }
+
+    for (let j = 0; j < r_size; j++) {
+        r_temp[j] = arr[m + 1 + j];
+    }
+
+    // merge temp arrays back into arr[l..r]
+    let i = 0;
+    let j = 0;
+    let k = l; // index of merged subarray
+
+    while (i < l_size && j < r_size) {
+        if (l_temp[i] <= r_temp[j]) {
+            arr[k] = l_temp[i];
+            i++;
+        }
+        else {
+            arr[k] = r_temp[j];
+            j++;
+        }
+        k++;
+    }
+
+    // copy remaining elements
+    while (i < l_size) {
+        arr[k] = l_temp[i];
+        i++;
+        k++;
+    }
+
+    while (j < r_size) {
+        arr[k] = r_temp[j];
+        j++;
+        k++;
+    }
+
+}
