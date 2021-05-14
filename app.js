@@ -1,3 +1,4 @@
+let bars = document.querySelectorAll(".bar");
 let arr_test = [10, 7, 8, 9, 1, 5];
 let currentAlgo = "";
 
@@ -10,8 +11,14 @@ const newArray_div = document.getElementById("new-array");
 const sort_div = document.getElementById("sort");
 const container = document.querySelector(".data-container");
 
+const len_of_arr = 20;
 const container_width = 600;
 const container_height = 384;
+
+// arr stores array element
+// itmd stores intermediate values
+// visities stores sorted elements
+var arr = [], itmd = [], visited = [];
 
 
 function generateBars(num = 20) {
@@ -65,7 +72,8 @@ function sort() {
     }
 
     else if (currentAlgo === "merge") {
-        msArrays();
+        let bars = document.querySelectorAll(".bar");
+        mergeSort(200, 0, bars.length - 1);
     }
 
     else if (currentAlgo === "quick") {
@@ -121,100 +129,10 @@ async function bubbleSort(delay) {
     }
 }
 
-async function merge2(delay, low, mid, high) {
-    let bars = document.querySelectorAll(".bar");
-    let left_size = low - mid + 1;
-    let right_size = high - mid;
-
-    // copy values over to left and right arrays
-    for (let i = 0; i <= left_size; i++) {
-        console.log("building left");
-        // left[i] = bars[i + l];
-        const left = document.createElement("div");
-        left.classList.add("left");
-
-        left.style.height = bars[i + l].style.height;
-        left.style.transform = `translateX(${i * 30}px)`;
-
-        // create a label element
-        var leftLabel = document.createElement("label");
-        leftLabel.classList.add("l_bar_id");
-
-        leftLabel.innerHTML = bars[i + l].childNodes[0].innerHTML;
-
-        left.appendChild(leftLabel);
-
-        l_container.appendChild(left);
-    }
-
-    for (let j = 0; j <= right_size; j++) {
-        console.log("building right");
-        // right[i] = bars[j + (m + 1)];
-        const right = document.createElement("div");
-        right.classList.add("right");
-
-        right.style.height = bars[j + (m + 1)].style.height;
-        right.style.transform = `translateX(${i * 30}px)`;
-
-        // create a label element
-        var rightLabel = document.createElement("label");
-        rightLabel.classList.add("r_bar_id");
-
-        rightLabel.innerHTML = bars[j + (m + 1)].childNodes[0].innerHTML;
-
-        right.appendChild(rightLabel);
-
-        r_container.appendChild(right);
-    }
-    
-    let i = 0;
-    let j = 0;
-    let merged = low;
-
-    while (i < left_size && j < right_size) {
-        // store current left value
-        let l_val = parseInt(left[i].childNodes[0].innerHTML);
-        // store current right value
-        let r_val = parseInt(right[j].childNodes[0].innerHTML);
-        console.log(`l_val = ${l_val}`);
-        console.log(`r_val = ${r_val}`);
-        // compare left and right values
-        if (l_val <= r_val) {
-            Console.log("switch");
-            // swap(bars, merged, i);
-            bars[merged].style.height = left[i].style.height;
-            bars[merged].childNodes[0].innerText = left[i].childNodes[0].innerText;
-            i++;
-
-        } else {
-            // swap(bars, merged, j);
-            bars[merged].style.height = right[j].style.height;
-            bars[merged].childNodes[0].innerText = right[j].childNodes[0].innerText;
-            j++;
-        }
-        merged++;
-    }
-
-    // fill in leftover values
-    while (i < left_size) {
-        bars[merged].style.height = left[i].style.height;
-        bars[merged].childNodes[0].innerText = left[i].childNodes[0].innerText;
-        i++;
-        merged++;
-    }
-
-    while (j < right_size) {
-        bars[merged].style.height = right[j].style.height;
-        bars[merged].childNodes[0].innerText = right[j].childNodes[0].innerText;
-        j++;
-        merged++;
-    }
-}
-
 async function merge(start, end) {
 
     // set up bounds
-    let mid = parseInt((l + r) >> 1);
+    let mid = parseInt((start + end) >> 1);
     let start1 = start, start2 = mid + 1;
     let end1 = mid, end2 = end;
 
@@ -226,12 +144,12 @@ async function merge(start, end) {
         if (arr[start1] <= arr[start2]) {
             itmd[index] = arr[start1]
             index = index + 1
-            start1 = start1 + 1;
+            start1 = start1 + 1
         }
         else if (arr[start1] > arr[start2]) {
             itmd[index] = arr[start2]
             index = index + 1
-            start2 = start2 + 1;
+            start2 = start2 + 1
         }
     }
   
@@ -240,13 +158,13 @@ async function merge(start, end) {
     while (start1 <= end1) {
         itmd[index] = arr[start1]
         index = index + 1
-        start1 = start1 + 1;
+        start1 = start1 + 1
     }
   
     while (start2 <= end2) {
         itmd[index] = arr[start2]
         index = index + 1
-        start2 = start2 + 1;
+        start2 = start2 + 1
     }
   
     // transfers itmd to arr
@@ -260,14 +178,10 @@ async function merge(start, end) {
 function msArrays() {
     let bars = document.querySelectorAll(".bar");
 
-    sectionElements();
-
     // arr stores array element
     // itmd stores intermediate values
     // visities stores sorted elements
-    var arr = [], itmd = [], visited = [];
-
-    var len_of_arr = 20;
+    const arr = [], itmd = [], visited = [];
 
     for (let i = 0; i < len_of_arr; i++) {
         arr.push(bars[i].childNodes[0].innerHTML);
@@ -281,17 +195,22 @@ function msArrays() {
     }
 }
 
-function drawBars(start, end) {
-    bars
+function drawBars(delay, start, end) {
+    console.log(arr)
+    console.log("YES")
 }
 
-async function mergeSort(delay, l, r) {
+async function mergeSort(delay, start, end) {
 
-    if (l < r) {
-        let mid = (l + r) / 2;
-        let left = await mergeSort(delay, l, mid);
-        let right = await mergeSort(delay, mid + 1, r);
-
+    if (start < end) {
+        let mid = parseInt((start + end) >> 1)
+        await mergeSort(delay, start, mid)
+        await mergeSort(delay, mid + 1, end)
+        await merge(start, end)
+        await drawBars(delay, start, end)
+  
+        // Waiting time is 800ms
+        await timeout(800)
     }
 }
 
@@ -444,6 +363,17 @@ function timeout(ms) {
 function main() {
 
     generateBars();
+
+    for (let i = 0; i < len_of_arr; i++) {
+        arr.push(bars[i].childNodes[0].innerHTML);
+        console.log(bars[i].childNodes[0].innerHTML);
+    }
+
+    // initialize itmd and visited with zeros
+    for (let i = 0; i < len_of_arr; i++) {
+        itmd.push(0);
+        visited.push(0);
+    }
 
     bubble_div.addEventListener("click", () => selectAlgo("bubble"));
 

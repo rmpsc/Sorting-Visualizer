@@ -1,6 +1,6 @@
 TODOs
 
-1. navbar
+1. navbar (DONE)
     - title
     - create new array
     - sorting algorithms
@@ -8,7 +8,10 @@ TODOs
 
 2. array visualizer
 
-    - implement merge and quick
+    - implement merge
+    - implement quick (DONE)
     - make function to swap bars (DONE)
     - disable top buttons when algorithm in progress
-    - make timeout function for pause
+    - make timeout function for pause (DONE)
+    - remove semicolons
+    - move algorithms to new js file
