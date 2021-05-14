@@ -1,6 +1,8 @@
 let bars = document.querySelectorAll(".bar");
 let arr_test = [10, 7, 8, 9, 1, 5];
 let currentAlgo = "";
+let estart = 0;
+let eend = 0;
 
 /* dom variables */
 const bubble_div = document.getElementById("bubble");
@@ -73,7 +75,8 @@ function sort() {
 
     else if (currentAlgo === "merge") {
         let bars = document.querySelectorAll(".bar");
-        mergeSort(200, 0, bars.length - 1);
+        console.log(arr)
+        mergeSort(50, 0, bars.length - 1);
     }
 
     else if (currentAlgo === "quick") {
@@ -176,12 +179,8 @@ async function merge(start, end) {
 }
 
 function msArrays() {
-    let bars = document.querySelectorAll(".bar");
 
-    // arr stores array element
-    // itmd stores intermediate values
-    // visities stores sorted elements
-    const arr = [], itmd = [], visited = [];
+    let bars = document.querySelectorAll(".bar");
 
     for (let i = 0; i < len_of_arr; i++) {
         arr.push(bars[i].childNodes[0].innerHTML);
@@ -196,8 +195,20 @@ function msArrays() {
 }
 
 function drawBars(delay, start, end) {
-    console.log(arr)
-    console.log("YES")
+    let bars = document.querySelectorAll(".bar");
+    for (let i = 0; i < len_of_arr; i++) {
+
+        if (visited[i]) {
+            bars[i].style.backgroundColor = "white";
+        }
+    }
+
+    for (let i = start; i <= end; i++) {
+        bars[i].style.backgroundColor = "red";
+        visited[i] = 1;
+    }
+    estart = start;
+    eend = end;
 }
 
 async function mergeSort(delay, start, end) {
@@ -208,9 +219,8 @@ async function mergeSort(delay, start, end) {
         await mergeSort(delay, mid + 1, end)
         await merge(start, end)
         await drawBars(delay, start, end)
-  
-        // Waiting time is 800ms
-        await timeout(800)
+
+        await timeout(delay)
     }
 }
 
@@ -364,16 +374,7 @@ function main() {
 
     generateBars();
 
-    for (let i = 0; i < len_of_arr; i++) {
-        arr.push(bars[i].childNodes[0].innerHTML);
-        console.log(bars[i].childNodes[0].innerHTML);
-    }
-
-    // initialize itmd and visited with zeros
-    for (let i = 0; i < len_of_arr; i++) {
-        itmd.push(0);
-        visited.push(0);
-    }
+    msArrays();
 
     bubble_div.addEventListener("click", () => selectAlgo("bubble"));
 
