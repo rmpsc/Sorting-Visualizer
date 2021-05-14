@@ -9,8 +9,10 @@ const selection_div = document.getElementById("selection");
 const newArray_div = document.getElementById("new-array");
 const sort_div = document.getElementById("sort");
 const container = document.querySelector(".data-container");
-const l_container = document.querySelector(".left-data-container");
-const r_container = document.querySelector(".right-data-container");
+
+const container_width = 600;
+const container_height = 384;
+
 
 function generateBars(num = 20) {
     for (let i = 0; i < num; i += 1) {
@@ -63,17 +65,10 @@ function sort() {
     }
 
     else if (currentAlgo === "merge") {
-        // alert("Merge sort is currently in development. Will be on the way shortly!");
-        // let bars = document.querySelectorAll(".bar");
-        // mergeSort(500, 0, bars.length - 1);
         msArrays();
     }
 
     else if (currentAlgo === "quick") {
-        // alert("Quick sort is currently in development. Will be on the way shortly!");
-        // console.log(arr_test);
-        // quickSortNorm(arr_test, 0, arr_test.length - 1);
-        // console.log(arr_test);
         let bars = document.querySelectorAll(".bar");
         quickSort(200, 0, bars.length - 1);
     }
@@ -95,11 +90,7 @@ async function bubbleSort(delay) {
             bars[j + 1].style.backgroundColor = "white";
 
             // pauses code for duration of delay
-            await new Promise((resolve) =>
-                setTimeout(() => {
-                resolve();
-                }, delay)
-            );
+            await timeout(delay);
 
              // store current j value
              var curr_j = parseInt(bars[j].childNodes[0].innerHTML);
@@ -109,13 +100,8 @@ async function bubbleSort(delay) {
              if (curr_j > next_j) {
 
                 swap(bars, j, j + 1);
+                await timeout(delay);
 
-                // To pause the execution of code for 300 milliseconds
-                await new Promise((resolve) =>
-                setTimeout(() => {
-                    resolve();
-                }, delay)
-                );
             }
             if (j === bars.length -i -2) {
                 // make last bar green
@@ -227,19 +213,22 @@ async function merge2(delay, low, mid, high) {
 
 async function merge(start, end) {
 
-    let mid = parseInt((l + r));
+    // set up bounds
+    let mid = parseInt((l + r) >> 1);
     let start1 = start, start2 = mid + 1;
     let end1 = mid, end2 = end;
 
     // initial index of merged subarray
     let index = start;
+
+    // loop until one list is exhausted
     while (start1 <= end1 && start2 <= end2) {
         if (arr[start1] <= arr[start2]) {
             itmd[index] = arr[start1]
             index = index + 1
             start1 = start1 + 1;
         }
-        else if(arr[start1] > arr[start2]) {
+        else if (arr[start1] > arr[start2]) {
             itmd[index] = arr[start2]
             index = index + 1
             start2 = start2 + 1;
@@ -260,6 +249,7 @@ async function merge(start, end) {
         start2 = start2 + 1;
     }
   
+    // transfers itmd to arr
     index = start
     while (index <= end) {
         arr[index] = itmd[index];
@@ -270,6 +260,11 @@ async function merge(start, end) {
 function msArrays() {
     let bars = document.querySelectorAll(".bar");
 
+    sectionElements();
+
+    // arr stores array element
+    // itmd stores intermediate values
+    // visities stores sorted elements
     var arr = [], itmd = [], visited = [];
 
     var len_of_arr = 20;
@@ -284,9 +279,10 @@ function msArrays() {
         itmd.push(0);
         visited.push(0);
     }
+}
 
-    console.log(itmd);
-
+function drawBars(start, end) {
+    bars
 }
 
 async function mergeSort(delay, l, r) {
@@ -303,6 +299,7 @@ async function partition(delay, low, high) {
     let bars = document.querySelectorAll(".bar");
     // stores minimum value so far
     var pivot_val = parseInt(bars[high].childNodes[0].innerHTML);
+
     // i starts before first index
     let i = low - 1;
 
@@ -310,11 +307,7 @@ async function partition(delay, low, high) {
     bars[high].style.backgroundColor = "rgb(119, 158, 255)";
 
     // pauses code for duration of delay
-    await new Promise((resolve) =>
-        setTimeout(() => {
-        resolve();
-        }, delay)
-    );
+    await timeout(delay);
 
     // stops before pivot which is last bar
     for (let j = low; j <= high - 1; j++) {
@@ -324,13 +317,7 @@ async function partition(delay, low, high) {
 
         // store current j value
         var j_val = parseInt(bars[j].childNodes[0].innerHTML);
-
-        // pauses code for duration of delay
-        await new Promise((resolve) =>
-            setTimeout(() => {
-            resolve();
-            }, delay)
-        );
+        await timeout(delay);
 
         // increments i then swaps i and j
         if (j_val < pivot_val) {
@@ -340,21 +327,10 @@ async function partition(delay, low, high) {
             i++;
             // i colored red
             bars[i].style.backgroundColor = "red";
-            // pauses code for duration of delay
-            await new Promise((resolve) =>
-                setTimeout(() => {
-                resolve();
-                }, delay)
-            );
+            await timeout(delay);
 
             swap(bars, i, j);
-
-            // pauses code for duration of delay
-            await new Promise((resolve) =>
-                setTimeout(() => {
-                resolve();
-                }, delay)
-            );
+            await timeout(delay);
         }
 
         // change j back to salmon
@@ -372,14 +348,7 @@ async function partition(delay, low, high) {
 
     // change pivot to green
     bars[i + 1].style.backgroundColor = "rgb(208, 255, 192)";
-
-
-    // pauses code for duration of delay
-    await new Promise((resolve) =>
-        setTimeout(() => {
-        resolve();
-        }, delay)
-    );
+    await timeout(delay);
 
     return i + 1;
 }
@@ -419,11 +388,7 @@ async function selectionSort(delay) {
             bars[j].style.backgroundColor = "white";
 
             // pauses code for duration of delay
-            await new Promise((resolve) =>
-                setTimeout(() => {
-                resolve();
-                }, delay)
-            );
+            await timeout(delay);
 
             // store current j value
             var current = parseInt(bars[j].childNodes[0].innerHTML);
@@ -448,12 +413,8 @@ async function selectionSort(delay) {
 
         swap(bars, i, min_idx);
 
-        // To pause the execution of code for 300 milliseconds
-        await new Promise((resolve) =>
-        setTimeout(() => {
-            resolve();
-        }, delay)
-        );
+        // pauses code for duration of delay
+        await timeout(delay);
 
         // reset (min_idx)th bar to salmon
         bars[min_idx].style.backgroundColor = "salmon";
@@ -474,6 +435,10 @@ function swap(bars, i, j) {
     // i takes j attributes
     bars[i].style.height = temp_height;
     bars[i].childNodes[0].innerText = temp_text;
+}
+
+function timeout(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function main() {
